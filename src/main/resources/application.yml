@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&SSL=false
+    username: root
+    password: 59852369
+  jpa:
+    database: MYSQL
+    show-sql: true
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    hibernate:
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy

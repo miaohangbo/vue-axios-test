@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vuejs-2.5.16.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="fun1()">查询</button>
+        <table border="1">
+
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(userlogin,index) in users">
+                <td>{{index +1}}</td>
+                <td>{{userlogin.userName}}</td>
+                <td>{{userlogin.password}}</td>
+                <td><button @click="fun2(userlogin.id)">修改</button></td>
+            </tr>
+        </table>
+
+    </div>
+
+<script>
+
+    new Vue({
+        el:'#app',
+        data: {
+            users:[]
+        },
+        methods:{
+            fun1:function(){
+                //从后台获取数据
+                //this.users =[{userName:'123',password:123}]
+                _this = this;
+                //使用axios
+                axios.get("/findAll").then(function(response){
+                   console.log(response.data)
+                    _this.users= response.data;
+                })
+            },
+            fun2:function(msg){
+                console.log(msg)
+
+                _this = this;
+                axios.post("/update",{id:msg}).then(function(response){
+                        console.log(response.data)
+                })
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
